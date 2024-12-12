@@ -47,8 +47,9 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           sudo docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/private:be
           sudo docker stop private-be || true
           sudo docker rm private-be || true
+          sudo docker rmi lamchihung241/private:be
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/private:be
           sudo docker run -d --name private-be -p 80:2000 ${{ secrets.DOCKER_USERNAME }}/private:be
         EOF
