@@ -50,5 +50,5 @@ jobs:
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/private:be
           sudo docker stop private-be || true
           sudo docker rm private-be || true
-          sudo docker run -d --name private-be -p 2000:2000 ${{ secrets.DOCKER_USERNAME }}/private:be
+          sudo docker run -d --name private-be -p 80:2000 ${{ secrets.DOCKER_USERNAME }}/private:be
         EOF
